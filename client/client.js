@@ -22,14 +22,20 @@ module.exports = class Client {
       output = [];
 
     s.on('error', done);
+    s.on('connect', () => {
+      console.log("-->client connected to server")
+
+    });
 
     rl.on('line', line => {
+      console.log('line in')
       if (handshaked) {
         output.push(line);
 
         return;
       }
 
+      console.log('handhake!!!!')
       handshaked = true;
 
       if (line !== 'hello')

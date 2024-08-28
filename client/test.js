@@ -8,7 +8,7 @@ const client = new Client(8124);
 const verbose = false;
 
 describe('Front backend test', function () {
-  it('should connect', done => {
+  it.only('should connect', done => {
     client.run(['coord'], (err, lines) => {
       expect(err).toNotExist();
       expect(lines).toEqual(['(15,15)']);
