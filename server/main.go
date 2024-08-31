@@ -1,6 +1,7 @@
 package main
 
 import (
+	"divagueame/canvas-server/state"
 	"bufio"
 	"fmt"
 	"net"
@@ -16,6 +17,14 @@ func confirmHandshake(writer *bufio.Writer) {
 	writer.Flush()
 }
 
+func parseCommand(line string) (string, error) {
+	if line == "coord\n\n" {
+		return "co", nil
+	}
+
+	return line, nil
+}
+
 func handleConn(conn net.Conn) {
 
 	defer conn.Close()
@@ -26,14 +35,19 @@ func handleConn(conn net.Conn) {
 	reader := bufio.NewReader(conn)
 	for {
 		line, err := reader.ReadString('\n')
+		if err != nil {
+			break
+		}
+
 		if line == "quit\r\n" {
 			break
 		}
 
-		if err != nil {
-			break
-		}
-		fmt.Println("Client sent:", line)
+		// parseCommand(line)
+		// command, err := parseCommand(line)
+		// if err == nil {
+		// 	fmt.Println("Parsed command:", command)
+		// }
 
 	}
 
@@ -47,6 +61,12 @@ func handleConn(conn net.Conn) {
 }
 
 func main() {
+	state.Initialize()
+	// state.PrintState()
+	// state.PrintCoord()
+	state.PrintCanvas()
+	// state.ChangeDirection("right", 2)
+	// state.PrintState()
 
 	conn, err := net.Listen("tcp", ":8124")
 	if err != nil {

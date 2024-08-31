@@ -2,6 +2,7 @@ package state
 
 import (
 	"fmt"
+	// "strconv"
 )
 
 type Position struct {
@@ -35,8 +36,7 @@ var directionName = map[Direction]string{
 
 type GridState struct {
 	position  Position
-	grid      []string
-	lines     [][]string
+	grid      [30][30]int
 	direction Direction
 	brush     string
 }
@@ -44,16 +44,15 @@ type GridState struct {
 var state *GridState
 
 func Initialize() {
-	state = &GridState{position: Position{
-		x: 15,
-		y: 15,
-	},
+	state = &GridState{
+		position: Position{
+			x: 15,
+			y: 15,
+		},
 		direction: DirectionUp,
-		grid:      make([]string, 0),
 		brush:     "hover",
 	}
 }
-
 func PrintCanvas() {
 	fmt.Println("PRINTING CANVAS", state.grid)
 }
