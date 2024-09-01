@@ -53,8 +53,41 @@ func Initialize() {
 		brush:     "hover",
 	}
 }
+func parseSquare(num int) string {
+	if num == 0 {
+		return " "
+	} else if num == 1 {
+		return "X"
+	} else if num == 2 {
+		return "P"
+	} else {
+		fmt.Print("ERror parsing Square", num)
+		return " "
+	}
+}
 func PrintCanvas() {
 	fmt.Println("PRINTING CANVAS", state.grid)
+	first_line := " ╔══════════════════════════════╗"
+	last_line := " ╚══════════════════════════════╝"
+
+	// first_line := " ╔═════╗"
+	// last_line := " ╚═════╝"
+	for _, row := range state.grid {
+		line += " ║"
+		for _, square := range row {
+			line += parseSquare(square)
+		}
+		line += "║"
+		line += "\n"
+
+	}
+
+	line += last_line
+	line += "\n"
+
+	fmt.Print("", line)
+
+	// fmt.Print(last_line)
 }
 
 func ChangeBrush(newBrush string) {
@@ -108,5 +141,5 @@ func updateCurrentPosition(x int, y int) {
 }
 
 func clearGrid() {
-	state.grid = make([]string, 0)
+	state.grid = [30][30]int{}
 }
