@@ -65,15 +65,16 @@ func parseSquare(num int) string {
 		return " "
 	}
 }
-func PrintCanvas() {
-	fmt.Println("PRINTING CANVAS", state.grid)
-	first_line := " ╔══════════════════════════════╗"
-	last_line := " ╚══════════════════════════════╝"
+func GetCanvas() string {
+	first_line := "╔══════════════════════════════╗"
+	last_line := "╚══════════════════════════════╝"
 
-	// first_line := " ╔═════╗"
-	// last_line := " ╚═════╝"
+	line := ""
+	line += first_line
+	line += "\n"
+
 	for _, row := range state.grid {
-		line += " ║"
+		line += "║"
 		for _, square := range row {
 			line += parseSquare(square)
 		}
@@ -83,11 +84,10 @@ func PrintCanvas() {
 	}
 
 	line += last_line
-	line += "\n"
+	line += "\n\n"
 
-	fmt.Print("", line)
-
-	// fmt.Print(last_line)
+	// fmt.Print("", line)
+	return line
 }
 
 func ChangeBrush(newBrush string) {
