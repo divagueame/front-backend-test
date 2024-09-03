@@ -2,9 +2,11 @@ package main
 
 import (
 	"divagueame/canvas-server/state"
+	// "divagueame/canvas-server/canvas"
 	"bufio"
 	"fmt"
 	"strings"
+	// "log"
 	"net"
 )
 
@@ -18,8 +20,9 @@ func confirmHandshake(writer *bufio.Writer) {
 }
 
 func parseCommand(line string) (string, error) {
+	// fmt.Println("parsing command", line)
 	if line == "coord\n\n" {
-		return "co", nil
+		return "coord", nil
 	} else if line == "render\n\n" {
 		return "render", nil
 	}
@@ -31,7 +34,9 @@ func handleConn(conn net.Conn) {
 
 	defer conn.Close()
 
-	resStr := "(15,15)"
+	resStr := ""
+	// resStr := "(15,15)"
+
 	writer := bufio.NewWriter(conn)
 	confirmHandshake(writer)
 
@@ -48,14 +53,23 @@ func handleConn(conn net.Conn) {
 
 		command, err := parseCommand(line)
 		if err != nil {
+			fmt.Println("Error!!", err)
 			break
 		}
+		// fmt.Println("Parsed command:", command)
 
 		if strings.TrimSpace(command) == "render" {
 			resStr = state.GetCanvas()
 		}
 
-		fmt.Println("", resStr)
+		if strings.TrimSpace(command) == "coord" {
+			fmt.Println("Adding:", state.GetPositionStr())
+			resStr += state.GetPositionStr()
+			resStr += "\n"
+			// resStr = "(15,15)"
+		}
+
+		// fmt.Println("", resStr)
 
 		_, err2 := writer.WriteString(resStr)
 		if err2 != nil {
@@ -69,6 +83,8 @@ func handleConn(conn net.Conn) {
 
 func main() {
 	state.Initialize()
+	// pos := state.GetPosition()
+	// fmt.Print("meowj", state.GetPositionStr())
 	// state.PrintState()
 	// state.PrintCoord()
 	// state.ChangeDirection("right", 2)

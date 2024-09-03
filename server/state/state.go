@@ -134,10 +134,16 @@ func PrintCoord() {
 	fmt.Println("Priting pos...", state.position.x)
 	fmt.Println("Priting pos...", state.position.y)
 }
-
 func updateCurrentPosition(x int, y int) {
 	state.position.x = x
 	state.position.y = y
+}
+
+func GetPosition() Position {
+	return state.position
+}
+func GetPositionStr() string {
+	return fmt.Sprintf("(%d,%d)", state.position.x, state.position.y)
 }
 
 func clearGrid() {
