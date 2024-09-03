@@ -21,60 +21,67 @@ The LOGO Server
 The server should open a local TCP socket on port 8124. The server accepts commands separated by newlines (\r\n).
 All server responses are also terminated by \r\n.
 
-steps <n>: move the cursor n steps in the current direction.
-left <n>, right <n>: change the direction (see “Directions” below).
-hover, draw, eraser: set the brush mode (see “Drawing” below).
 coord: print the current coordinates of the cursor with the format (x,y).
 render: print the current canvas.
+left <n>, right <n>: change the direction (see “Directions” below).
+hover, draw, eraser: set the brush mode (see “Drawing” below).
 clear: erase the current canvas, while keeping the current cursor and direction.
 quit: closes the current connection.
-At any time, the client can send the render command to print the current canvas (surrounded by a frame for clarity). For example, the following commands will result in this output:
+steps <n>: move the cursor n steps in the current direction.
+
+
+At any time, the client can send the render command to print the current canvas 
+(surrounded by a frame for clarity). For example, the following commands will result in this output:
 
 > steps 1
 > render
 > ╔══════════════════════════════╗
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ \* ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
-> ║ ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║               \*             ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
+> ║                              ║
 > ╚══════════════════════════════╝
 
 The font makes the canvas appear rectangular, but it’s actually a 30x30 square.
 
 Directions
-The server supports 8 directions: :arrow_up: :arrow_upper_right: :arrow_right: :arrow_lower_right: :arrow_down: :arrow_lower_left: :arrow_left: :arrow_upper_left:.
+The server supports 8 directions:
+:arrow_up: :arrow_upper_right: :arrow_right: :arrow_lower_right: 
+:arrow_down: :arrow_lower_left: :arrow_left: :arrow_upper_left:
+
 The left and right commands can cycle through directions. The initial direction is top.
 
 For example, if the current direction is :arrow_up:, right 3 will set it to :arrow_lower_right:.
 
 Coordinates
-The top left coordinate is (0, 0). X increases when you move to the right, while Y increase when you move to the bottom.
+The top left coordinate is (0, 0). X increases when you move to the right, while Y increase when you move 
+to the bottom.
 
 Drawing
 The steps 1 command will (possibly) modify the current position and move the cursor 1 step in the current direction.
@@ -94,11 +101,16 @@ The outer frame should use the appropriate characters from the Unicode box-drawi
 
 Wrapping up
 Testing
-The starter code for the exercise includes an example client and a collection of tests which you can use to check the basic functionality of your code. You will notice that these tests will verify whether your server responed as expected, but do not give any details on the correct expected output for each case.
+The starter code for the exercise includes an example client and a collection of tests which you can use to check the 
+basic functionality of your code. You will notice that these tests will verify whether your server responed as expected, 
+but do not give any details on the correct expected output for each case.
 
-As always, remember that while unit tests can provide useful guidance, passing the tests does not guarantee that the server code is 100% correct.
+As always, remember that while unit tests can provide useful guidance, passing the tests does not guarantee that the 
+server code is 100% correct.
 
-When testing your server against the example client, you can assume that the client is correct: That is, the completed server you submit should be able to interact with the client as given without making any changes to the client.js file.
+When testing your server against the example client, you can assume that the client is correct: 
+That is, the completed server you submit should be able to interact with the client as given without making any changes to 
+the client.js file.
 
 Submitting your code
 Your final submission for this exercise should be a zip file or tarball including:
