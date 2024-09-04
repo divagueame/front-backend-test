@@ -146,6 +146,13 @@ func GetPositionStr() string {
 	return fmt.Sprintf("(%d,%d)", state.position.x, state.position.y)
 }
 
+// func GetPositionStr(pos Position) string {
+// parsedX := strconv.Itoa(pos.x)
+// parsedY := strconv.Itoa(pos.y)
+// return fmt.Sprintf("(%s,%s)", parsedX, parsedY)
+// return fmt.Sprintf("(%d,%d)", pos.x, pos.y)
+// }
+
 func clearGrid() {
 	state.grid = [30][30]int{}
 }
